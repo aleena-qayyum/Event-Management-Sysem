@@ -3,12 +3,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 const BASE_URL = "https://app.ticketmaster.com/discovery/v2";
 const API_KEY = import.meta.env.VITE_TM_API_KEY;
 
-export const fetctEvents = createAsyncThunk("events/fetchEvents", async (_, { rejectWithValue }) => 
+export const fetchEvents = createAsyncThunk("events/fetchEvents", async (_, { rejectWithValue }) => 
 { try{
     const res = await fetch(
         `${BASE_URL}/events.json?apikey=${API_KEY}&size=20&sort=date,asc`
     );
-    if(res!=ok){
+    if(!res.ok){
         throw new Error(`Request failed (${res.status})`);
     }
     const data = await res.json();
@@ -21,7 +21,7 @@ export const fetctEvents = createAsyncThunk("events/fetchEvents", async (_, { re
 
 const eventsSlice = createSlice(
     {
-        name: 'eventSlicess',
+        name: 'events',
         initialState:{
             list:[],
             loading:false,
@@ -42,7 +42,7 @@ const eventsSlice = createSlice(
                 .addCase(fetchEvents.rejected, (state, action) =>
                 {
                     state.loading = false;
-                    state.error = action.paylaod || "something went wrong sadly:("
+                    state.error = action.payload || "Something went wrong";
                 });
             },
 
