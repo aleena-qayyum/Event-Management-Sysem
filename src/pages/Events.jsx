@@ -38,7 +38,12 @@ export default function Events() {
 
     return (
     <div>
-      <h1>Events</h1>
+      <section className="hero">
+  <h1>
+    Find your next <span>experience</span>
+  </h1>
+  <p>Concerts, sports, theatre and more, all in one place.</p>
+</section>
 
       <form className="search-form" onSubmit={handleSearch}>
         <input
